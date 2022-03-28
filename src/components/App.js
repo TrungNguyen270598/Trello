@@ -7,6 +7,7 @@ import Trellolist from "./TrelloList";
 import { sort } from "../action";
 import styled from "styled-components";
 
+
 const ListContainer = styled.div`
     display: flex;
     flex-direction: row;
