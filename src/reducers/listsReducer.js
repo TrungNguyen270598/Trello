@@ -42,21 +42,32 @@ const listsReducer = (state = initialState, action) => {
   switch (action.type) {
     case CONSTANTS.ADD_LIST:
       const newList = {
-        title: action.payload,
+        title: action.payload,       
         cards: [],
         id: `list-${listID}`,
       };
       listID += 1;
-
       return [...state, newList];
+      
+      case CONSTANTS.EDIT_CARD: {     
+          return state.map((list)=>{
+            if(list.cards.id === action.payload.id) {
+              return {
+                ...list,
+                text: action.payload.text
+              }
+            }
+            console.log('a121bbr',list.cards.id,action.payload.id)
+            return list;
+          })        
+      }
 
     case CONSTANTS.ADD_CARD: {
       const newCard = {
         text: action.payload.text,
-        id: `card-${cardID}`,
+        id: `card-${cardID}`,     
       };
       cardID += 1;
-
       console.log("action received", action);
       const newState = state.map((list) => {
         if (list.id === action.payload.listID) {
@@ -83,10 +94,10 @@ const listsReducer = (state = initialState, action) => {
             cards: list.cards.filter((card) => card.id !== id),
           };
         }
-        console.log('cardsssss',list.cards.filter((card) => card.id !== id))
         return list;
       });
     }
+
 
     case CONSTANTS.DRAG_HAPPENED:
       const {
@@ -94,8 +105,7 @@ const listsReducer = (state = initialState, action) => {
         droppableIdEnd,
         droppableIndexStart,
         droppableIndexEnd,
-        draggableId,
-        type,
+        
       } = action.payload;
       const newState = [...state];
 

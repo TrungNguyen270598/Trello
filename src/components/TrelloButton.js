@@ -15,8 +15,8 @@ function TrelloButton(props) {
 
   const buttonText = isList ? "Add another card" : "Add another list";
   const buttonTextOpacity = isList ? 1 : 0.5;
-  const buttonTextColor = isList ? "inherit" : "black";
-  const buttonTextBackground = isList ? "inherit" : "rgba(0,0,0,0.15)";
+  const buttonTextColor = isList ? "" : "black";
+  const buttonTextBackground = isList ? "" : "rgba(0,0,0,0.15)";
   // const buttonText = "Add another card"
   // "inherit" "rgba(0,0,0,0.15)"
   return (

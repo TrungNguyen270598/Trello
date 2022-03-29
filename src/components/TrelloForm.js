@@ -5,9 +5,7 @@ import TextareaAutosize from "@mui/base/TextareaAutosize";
 import Icon from "@mui/material/Icon";
 import { connect } from "react-redux";
 
-
-
-import { addList,addCard  } from "../action";
+import { addList, addCard } from "../action";
 
 // consat TextAreaContainer = styled.div`
 //   resize: none;
@@ -16,11 +14,12 @@ import { addList,addCard  } from "../action";
 //   overflow: hidden;
 //   outline: "none";
 // `;
-function TrelloForm(props) {
+const TrelloForm = (props) => {
   const [input, setInput] = useState("");
-  const { onBlur, isList, listID } = props;
   
-  
+  const {  onBlur, isList, listID } = props;
+ 
+
   const placeholder = isList
     ? "Enter a title for this card..."
     : "Enter list title...";
@@ -28,11 +27,14 @@ function TrelloForm(props) {
   // const buttonTitle = list ? "Add list" : "Add card";
   const onChangeInput = (e) => {
     setInput(e.target.value);
+    
   };
+
+  
 
   const handleAddList = () => {
     const { dispatch } = props;
-    console.log('props',dispatch)
+    console.log("props", dispatch);
     if (input) {
       dispatch(addList(input));
       console.log("input", input);
@@ -58,15 +60,16 @@ function TrelloForm(props) {
           padding: "6px 8px 2px",
         }}
       >
+        
         {/* <TextAreaContainer> */}
-          <TextareaAutosize
-            style={styles.TextareaAutosize}
-            placeholder={placeholder}
-            autoFocus
-            value={input}
-            onChange={onChangeInput}
-            onBlur={onBlur}
-          />
+        <TextareaAutosize
+          style={styles.TextareaAutosize}
+          placeholder={placeholder}
+          autoFocus
+          value={input}
+          onChange={onChangeInput}
+          onBlur={onBlur}
+        />
         {/* </TextAreaContainer> */}
       </Card>
       <div
@@ -80,14 +83,14 @@ function TrelloForm(props) {
           onMouseDown={isList ? handleAddCard : handleAddList}
           variant="contained"
           style={{ color: "white", backgroundColor: "#5aac44" }}
-        > 
+        >
           {buttonTitle}
         </Button>
-
-        <Icon style={{ marginLeft: 8, cursor: "pointer" }}>close</Icon>
+       <Icon style={{ marginLeft: 8, cursor: "pointer" }}>close</Icon>
       </div>
     </div>
   );
+
 }
 
 const styles = {
