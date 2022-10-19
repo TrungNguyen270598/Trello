@@ -44,7 +44,10 @@ const DeleteButton = styled(Icon)`
 const TrelloCard = ({ text, id, index, listID, dispatch }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [cardText, setText] = useState(text);
-
+  // const a = [...lists.find(list=>list.id=1).cards]
+  // const newCard = a.map(e=>({...e}))
+  
+  // console.log(lists[0])
   const handlDeleteCard = () => {
     // console.log('sss',listID);
     dispatch(deleteCard(id, listID));
@@ -57,22 +60,18 @@ const TrelloCard = ({ text, id, index, listID, dispatch }) => {
   const handleChange = (e) => {
     setText(e.target.value);
   };
+  console.log(id, listID, cardText);
 
   const saveCard = (e) => {
     e.preventDefault();
-    console.log("sdakdkSAVECARD", listID, cardText, id);
-    dispatch(editCard(id.text, listID, cardText));
-    setIsEditing(false);
+    dispatch(editCard(id, listID, cardText));
+    // setIsEditing(false);
   };
 
   const renderEditForm = () => {
     return (
       <div>
-        <TextareaAutosize
-          style={styles.TextareaAutosize}
-          text={cardText}
-          onChange={handleChange}
-        ></TextareaAutosize>
+        <TextareaAutosize style={styles.TextareaAutosize} text={cardText} onChange={handleChange}></TextareaAutosize>
         <Icon display={{ marginRigt: "18" }} onClick={saveCard}>
           save
         </Icon>
@@ -84,18 +83,10 @@ const TrelloCard = ({ text, id, index, listID, dispatch }) => {
     return (
       <Draggable draggableId={String(id)} index={index}>
         {(provided) => (
-          <CardContainer
-            ref={provided.innerRef}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-            onDoubleClick={() => setIsEditing(true)}
-          >
+          <CardContainer ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} onDoubleClick={() => setIsEditing(true)}>
             <CardContainer>
               <Card>
-                <EditButton
-                  fontSize="small"
-                  onMouseDown={() => setIsEditing(true)}
-                >
+                <EditButton fontSize="small" onMouseDown={() => setIsEditing(true)}>
                   edit
                 </EditButton>
                 <DeleteButton fontSize="small" onMouseDown={handlDeleteCard}>
