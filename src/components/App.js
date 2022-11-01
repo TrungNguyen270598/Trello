@@ -6,11 +6,9 @@ import TrelloButton from "./TrelloButton";
 import Trellolist from "./TrelloList";
 import { sort } from "../action";
 import styled from "styled-components";
-
-
 const ListContainer = styled.div`
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 `;
 
 function App(props) {
@@ -20,29 +18,15 @@ function App(props) {
     if (!destination) {
       return;
     }
-    props.dispatch(
-      sort(
-        source.droppableId,
-        destination.droppableId,
-        source.index,
-        destination.index,
-        draggableId
-      )
-    );
+    props.dispatch(sort(source.droppableId, destination.droppableId, source.index, destination.index, draggableId));
   };
-
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div>
         <h1 className="title">Trello</h1>
         <ListContainer>
           {lists.map((list) => (
-            <Trellolist
-              listID={list.id}
-              key={list.id}
-              title={list.title}
-              cards={list.cards}
-            />
+            <Trellolist listID={list.id} key={list.id} title={list.title} cards={list.cards} />
           ))}
           <TrelloButton props />
         </ListContainer>
